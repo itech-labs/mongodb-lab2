@@ -26,7 +26,7 @@ $distinctProjects = $collection_projects->distinct("name");
         ?>
         </select><br>
         <label for="date">Choose a date:</label>
-        <input type="date" name="date" id="date"><br>
+        <input type="date" name="date" id="date" value="<?php echo date('Y-m-d'); ?>"><br>
         <input type="submit" value="Submit">
     </form>
 
