@@ -11,6 +11,11 @@ $query["project"] = $project_name;
 $query["end_time"] = ['$lte' => $dateUnix];
 
 $cursor = $collection_tasks->find($query, ["_id" => 0]);
+
+$projects = [];
+foreach ($cursor as $project) {
+    $projects[] = $project;
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +30,7 @@ $cursor = $collection_tasks->find($query, ["_id" => 0]);
     <h2>Completed tasks for the <?php echo($project_name)?> on the <?php echo($date)?></h2>
 
     <?php
-    if ($cursor->isDead()) {
+    if (($projects) == 0) {
         echo("<p>No completed tasks for the $project_name.</p>");
     } else {
     ?>
@@ -42,7 +47,7 @@ $cursor = $collection_tasks->find($query, ["_id" => 0]);
             </thead>
             <tbody>
                 <?php
-                foreach ($cursor as $project) {
+                foreach ($projects as $project) {
                     printf("<tr><td>%s</td>", $project["project"]);
                     printf("<td>%s</td>", $project["title"]);
                     printf("<td>%s</td>", $project["description"]);

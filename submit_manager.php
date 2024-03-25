@@ -10,6 +10,11 @@ $query["manager"] = $pr_manager;
 $count = $collection_projects->count($query);
 
 $cursor = $collection_projects->find($query, ["_id" => 0]);
+
+$projects = [];
+foreach ($cursor as $project) {
+    $projects[] = $project;
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +30,7 @@ $cursor = $collection_projects->find($query, ["_id" => 0]);
     <h1><?php echo($count)?></h1>
 
     <?php
-    if ($cursor->isDead()) {
+    if (count($projects) == 0) {
         echo("<p>No projects of the $pr_manager.</p>");
     } else {
     ?>
@@ -36,7 +41,7 @@ $cursor = $collection_projects->find($query, ["_id" => 0]);
             </thead>
             <tbody>
                 <?php
-                foreach ($cursor as $project) {
+                foreach ($projects as $project) {
                     printf("<tr><td>%s</td>", $project["name"]);
                     printf("<td>%s</td></tr>", $project["manager"]);
                 }
