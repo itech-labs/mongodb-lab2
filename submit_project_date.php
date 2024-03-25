@@ -42,7 +42,6 @@ $cursor = $collection_tasks->find($query, ["_id" => 0]);
             </thead>
             <tbody>
                 <?php
-                $cursor->rewind();
                 foreach ($cursor as $project) {
                     printf("<tr><td>%s</td>", $project["project"]);
                     printf("<td>%s</td>", $project["title"]);
