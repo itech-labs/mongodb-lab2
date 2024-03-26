@@ -8,6 +8,8 @@ $query = [];
 $query["manager"] = $pr_manager;
 
 $workers = $collection_tasks->distinct("workers", $query, ["_id" => 0]);
+
+$currentFile = $_SERVER["PHP_SELF"];
 ?>
 
 <!DOCTYPE html>
